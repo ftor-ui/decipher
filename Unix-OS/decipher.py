@@ -1,7 +1,21 @@
-from colorama import Fore, Back, Style
-import hashlib
-import os.path
 import sys
+try:
+    import os
+except:
+    print("Fatal error: Can not load module \"os\"")
+    sys.exit(1)
+try:
+    import hashlib
+except:
+    print("Fatal error: Can not load module \"hashlib\"")
+    sys.exit(1)
+try:
+    from colorama import Fore, Back, Style
+except:
+    try:
+        os.system("pip install colorama")
+    except:
+        print("Program has been stopped")
 global hashV
 global dictU
 global tp
@@ -71,6 +85,12 @@ defDict = [
     '666666',
     '000000'
 ]
+def force_quit(exctype, value, traceback):
+    if exctype == KeyboardInterrupt:
+        print("Program has been stopped")
+    else:
+        sys.__excepthook__(exctype, value, traceback)
+sys.excepthook = force_quit
 if __name__ == '__main__':
     if len(sys.argv) == 1:
         print(Fore.WHITE+Style.BRIGHT+"Examples: python decipher.py [hash/file] [dictionary]\nIf you do not specify a dictionary, the default dictionary will be used."+Back.RESET)
@@ -122,7 +142,7 @@ if tp == "false":
         for hashh in hashV:
             status = False
             if colvo_errors == limit_errors:
-                print("\n"+Fore.WHITE+Back.RED+Style.BRIGHT+sys.argv[1]+": FILE DOES NOT CONTAIN HASH's!\nProgram has been stoped"+Back.RESET)
+                print("\n"+Fore.WHITE+Back.RED+Style.BRIGHT+sys.argv[1]+": FILE DOES NOT CONTAIN HASH's!\nProgram has been stopped"+Back.RESET)
                 sys.exit(1)
             if len(hashh) <= 1:
                 continue
@@ -151,7 +171,7 @@ elif tp == "true":
         for hashh in hashV:
             status = False
             if colvo_errors == limit_errors:
-                print("\n"+Fore.WHITE+Back.RED+Style.BRIGHT+sys.argv[1]+": FILE DOES NOT CONTAIN HASH's!\nProgram has been stoped"+Back.RESET)
+                print("\n"+Fore.WHITE+Back.RED+Style.BRIGHT+sys.argv[1]+": FILE DOES NOT CONTAIN HASH's!\nProgram has been stopped"+Back.RESET)
                 sys.exit(1)
             if len(hashh) <= 1:
                 continue
@@ -163,7 +183,7 @@ elif tp == "true":
                 passwd = password
                 h2 = hashlib.md5(password.encode("utf-8"))
                 if hashh == h2.hexdigest():
-                    print(Fore.WHITE+Back.RED+Style.BRIGHT+hashh + ": KEY FOUND! ["+passwd+"]"+Back.RESET)
+                    print(Fore.WHITE+Back.GREEN+Style.BRIGHT+hashh + ": KEY FOUND! ["+passwd+"]"+Back.RESET)
                     status = True
             if status == False:
                 print(Fore.WHITE+Back.RED+Style.BRIGHT+hashh + ": KEY NOT FOUND :("+Back.RESET)
