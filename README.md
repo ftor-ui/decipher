@@ -1,5 +1,6 @@
 # decipher
-This program decrypts MD5 hashes by brute force attack. This program can also decipher the list of MD5 hashes. © Google Translate
+This program decrypts MD5 hashes by brute force attack. This program can also decipher the list of MD5 hashes.
+© Google Translate
 
 Hello to all!
 
