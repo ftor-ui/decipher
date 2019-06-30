@@ -3,7 +3,7 @@ This program decrypts MD5 hashes by brute force attack. This program can also de
 
 Hello to all!
 
-I made this script inspired by the Grey Hack gme. I would be glad if you like.
+I made this script inspired by the Grey Hack game. I would be glad if you like.
 
 And yes, I apologize for my English, everything I wrote was translated by Google Translite.
 If anyone is interested, then I am from Russia.
