@@ -1,8 +1,32 @@
-from termcolor import colored
-from colorama import init
-import hashlib
-import os.path
 import sys
+try:
+    import os
+except:
+    print("Fatal error: Can not load module \"os\"")
+    sys.exit(1)
+try:
+    import hashlib
+except:
+    print("Fatal error: Can not load module \"hashlib\"")
+    sys.exit(1)
+try:
+    from termcolor import colored
+except:
+    try:
+        os.system("pip install termcolor")
+        from termcolor import colored
+    except:
+        print("Program has been stopped")
+        sys.exit(1)
+try:
+    from colorama import init
+except:
+    try:
+        os.system("pip install colorama")
+        from colorama import init
+    except:
+        print("Program has been stopped")
+        sys.exit(1)
 global hashV
 global dictU
 global tp
@@ -73,6 +97,12 @@ defDict = [
     '666666',
     '000000'
 ]
+def force_quit(exctype, value, traceback):
+    if exctype == KeyboardInterrupt:
+        print("Program has been stopped")
+    else:
+        sys.__excepthook__(exctype, value, traceback)
+sys.excepthook = force_quit
 if __name__ == '__main__':
     if len(sys.argv) == 1:
         print(colored("Examples: decipher [hash/file] [dictionary]\nIf you do not specify a dictionary, the default dictionary will be used.","white",attrs=['bold']))
@@ -128,7 +158,7 @@ if tp == "false":
         for hashh in hashV:
             status = False
             if colvo_errors == limit_errors:
-                print(colored("\n"+sys.argv[1]+": FILE DOES NOT CONTAIN HASH's!\nProgram has been stoped","white","on_red",attrs=['bold']))
+                print(colored("\n"+sys.argv[1]+": FILE DOES NOT CONTAIN HASH's!\nProgram has been stopped","white","on_red",attrs=['bold']))
                 sys.exit(1)
             if len(hashh) <= 1:
                 continue
@@ -157,7 +187,7 @@ elif tp == "true":
         for hashh in hashV:
             status = False
             if colvo_errors == limit_errors:
-                print(colored("\n"+sys.argv[1]+": FILE DOES NOT CONTAIN HASH's!\nProgram has been stoped","white","on_red",attrs=['bold']))
+                print(colored("\n"+sys.argv[1]+": FILE DOES NOT CONTAIN HASH's!\nProgram has been stopped","white","on_red",attrs=['bold']))
                 sys.exit(1)
             if len(hashh) <= 1:
                 continue
